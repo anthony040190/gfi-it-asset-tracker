@@ -1,11 +1,16 @@
 package com.codeandchill.gfi_asset_inventory.entities;
 
 import jakarta.persistence.*;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "brand")
 public class Brand {
     @Id
