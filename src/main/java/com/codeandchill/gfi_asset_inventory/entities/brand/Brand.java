@@ -1,5 +1,6 @@
-package com.codeandchill.gfi_asset_inventory.entities;
+package com.codeandchill.gfi_asset_inventory.entities.brand;
 
+import com.codeandchill.gfi_asset_inventory.entities.computer.Computer;
 import jakarta.persistence.*;
 import lombok.*;
 

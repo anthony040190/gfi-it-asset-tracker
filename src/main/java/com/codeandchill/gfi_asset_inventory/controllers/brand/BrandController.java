@@ -1,10 +1,10 @@
-package com.codeandchill.gfi_asset_inventory.controllers;
+package com.codeandchill.gfi_asset_inventory.controllers.brand;
 
-import com.codeandchill.gfi_asset_inventory.dtos.BrandDto;
-import com.codeandchill.gfi_asset_inventory.dtos.RegisterBrandRequest;
-import com.codeandchill.gfi_asset_inventory.entities.Brand;
-import com.codeandchill.gfi_asset_inventory.mappers.BrandMapper;
-import com.codeandchill.gfi_asset_inventory.repositories.BrandRepository;
+import com.codeandchill.gfi_asset_inventory.dtos.brand.BrandDto;
+import com.codeandchill.gfi_asset_inventory.dtos.brand.RegisterBrandRequest;
+import com.codeandchill.gfi_asset_inventory.dtos.brand.UpdateBrandRequest;
+import com.codeandchill.gfi_asset_inventory.mappers.brand.BrandMapper;
+import com.codeandchill.gfi_asset_inventory.repositories.brand.BrandRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -27,6 +27,8 @@ public class BrandController {
                 .toList();
     }
 
+    // Check if id does exist
+    // return ResponseEntity.ok(brandMapper.toDto(brand));
     @GetMapping("/{id}")
     public ResponseEntity<BrandDto> getBrand(@PathVariable Long id) {
 
@@ -38,7 +40,7 @@ public class BrandController {
         return ResponseEntity.ok(brandMapper.toDto(brand));
     }
     // Create Mapper for the fields
-    // Convert to Entity
+    // Convert to Entity = brandMapper.toEntity(request);
     // Save it = brandRepository.save(Entity)
     // Create DTO version = brandMapper.toDto(Entity)
     // Create URI = uriComponentsBuilder.path("/brands/{id}").buildAndExpand(brandDto.getId()).toUri();
@@ -57,6 +59,25 @@ public class BrandController {
         return ResponseEntity.created(uri).body(brandDto);
     }
 
+    // Check if id does exist
+
+    @PutMapping("/{id}")
+    public ResponseEntity<BrandDto> updateBrand(@PathVariable Long id, @RequestBody UpdateBrandRequest request) {
+        var brand = brandRepository.findById(id).orElse(null);
+
+        if(brand == null)
+            return ResponseEntity.notFound().build();
+
+
+        brandMapper.update(request, brand);
+        brandRepository.save(brand);
+
+        return ResponseEntity.ok(brandMapper.toDto(brand));
+    }
+
+    // Check if id does exist
+    // Delete
+    // return noContent
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteBrand(@PathVariable Long id) {
 
@@ -67,6 +88,5 @@ public class BrandController {
 
         brandRepository.delete(brand);
         return ResponseEntity.noContent().build();
-
     }
 }

@@ -1,4 +1,4 @@
-package com.codeandchill.gfi_asset_inventory.dtos;
+package com.codeandchill.gfi_asset_inventory.dtos.brand;
 
 
 import lombok.AllArgsConstructor;

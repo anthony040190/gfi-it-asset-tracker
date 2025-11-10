@@ -1,11 +1,10 @@
-package com.codeandchill.gfi_asset_inventory.entities;
+package com.codeandchill.gfi_asset_inventory.entities.computer;
 
+import com.codeandchill.gfi_asset_inventory.entities.brand.Brand;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.List;
 
 @Entity
 @Data
