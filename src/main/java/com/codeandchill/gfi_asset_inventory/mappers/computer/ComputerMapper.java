@@ -7,6 +7,6 @@ import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
 public interface ComputerMapper {
-    @Mapping(source = "computer.id", target = "brandId")
+    @Mapping(source = "brand.id", target = "brandId")
     ComputerDto toDto(Computer computer);
 }

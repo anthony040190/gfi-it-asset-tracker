@@ -11,5 +11,5 @@ public class ComputerDto {
     private String model;
     private String serialNumber;
     private double price;
-    private Brand brandId;
+    private Long brandId;
 }
