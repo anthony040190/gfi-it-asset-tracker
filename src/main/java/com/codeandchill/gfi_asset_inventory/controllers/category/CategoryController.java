@@ -2,6 +2,7 @@ package com.codeandchill.gfi_asset_inventory.controllers.category;
 
 import com.codeandchill.gfi_asset_inventory.dtos.category.CategoryDto;
 import com.codeandchill.gfi_asset_inventory.dtos.category.RegisterCategoryDto;
+import com.codeandchill.gfi_asset_inventory.dtos.category.UpdateCategoryDto;
 import com.codeandchill.gfi_asset_inventory.mappers.category.CategoryMapper;
 import com.codeandchill.gfi_asset_inventory.repositories.category.CategoryRepository;
 import lombok.AllArgsConstructor;
@@ -50,5 +51,18 @@ public class CategoryController {
         var uri = uriComponentsBuilder.path("/categories/{id}").buildAndExpand(categoryDto.getId()).toUri();
 
         return ResponseEntity.created(uri).body(categoryDto);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<CategoryDto> updateCategory(@PathVariable Long id, @RequestBody UpdateCategoryDto request) {
+        var category = categoryRepository.findById(id).orElse(null);
+
+        if(category == null)
+            return ResponseEntity.notFound().build();
+
+        categoryMapper.update(request, category);
+        categoryRepository.save(category);
+
+        return ResponseEntity.ok(categoryMapper.toDto(category));
     }
 }
